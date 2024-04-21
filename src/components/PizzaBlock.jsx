@@ -20,6 +20,7 @@ function PizzaBlock(props) {
         <ul>
           {type.map((typeId) => (
             <li
+              key={typeId}
               onClick={() => setActiveType(typeId)}
               className={activeType === typeId ? 'active' : ''}>
               {typeNames[typeId]}
@@ -29,6 +30,7 @@ function PizzaBlock(props) {
         <ul>
           {size.map((itemSize, index) => (
             <li
+              key={itemSize}
               onClick={() => setActiveSize(index)}
               className={activeSize === index ? 'active' : ''}>
               {itemSize} см.
