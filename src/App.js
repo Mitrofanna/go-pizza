@@ -6,15 +6,18 @@ import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import PizzaBlock from './components/PizzaBlock';
+import Preloader from './components/Preloader';
 
 function App() {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch(API_ITEMS)
       .then((res) => res.json())
       .then((json) => {
         setItems(json);
+        setIsLoading(false);
       });
   }, []);
 
@@ -29,9 +32,9 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {items.map((item) => (
-              <PizzaBlock key={item.id} {...item} />
-            ))}
+            {isLoading
+              ? [...new Array(6)].map((_, index) => <Preloader key={index} />)
+              : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
           </div>
         </div>
       </div>
