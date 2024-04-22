@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './scss/app.scss';
-import items from './assets/items.json';
+import { API_ITEMS } from './api';
 import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import PizzaBlock from './components/PizzaBlock';
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch(API_ITEMS)
+      .then((res) => res.json())
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
