@@ -9,22 +9,28 @@ import { API_ITEMS } from '../api';
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState(0);
+  //const [activeSort, setActiveSort] = useState(0);
 
   useEffect(() => {
-    fetch(API_ITEMS)
+    setIsLoading(true);
+    fetch(API_ITEMS + '?category=' + activeCategory)
       .then((res) => res.json())
       .then((json) => {
         setItems(json);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, []);
+  }, [activeCategory]);
 
   return (
     <div className="content">
       <div className="container">
         <div className="content__top">
-          <Categories />
+          <Categories
+            activeCategory={activeCategory}
+            onClickCategory={(index) => setActiveCategory(index)}
+          />
           <Sort />
         </div>
         <h2 className="content__title">Все пиццы</h2>

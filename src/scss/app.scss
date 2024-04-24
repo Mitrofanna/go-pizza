@@ -11,8 +11,7 @@ body {
   width: calc(100vw - 100px);
   height: 100%;
   background-color: #fff;
-  margin: 50px auto;
-  border-radius: 10px;
+  margin: 0 auto;
   max-width: 1400px;
 }
 
@@ -126,16 +125,21 @@ body {
     border-top: 1px solid $gray-line;
     padding-top: 30px;
     margin-top: 30px;
+    justify-content: space-between;
 
     &-img {
       display: flex;
       align-items: center;
       margin-right: 15px;
-      width: 10%;
 
       img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
+
+        @media (max-width: 1060px) {
+          width: 80px;
+          height: 80px;
+        }
       }
     }
 
@@ -144,12 +148,22 @@ body {
       flex-direction: column;
       justify-content: center;
       width: 40%;
+      margin-right: 25px;
+
+      @media (max-width: 820px) {
+        width: 30%;
+      }
 
       h3 {
         font-weight: bold;
         font-size: 22px;
         line-height: 27px;
         letter-spacing: 0.01em;
+
+        @media (max-width: 820px) {
+          font-size: 18px;
+          line-height: 23px;
+        }
       }
 
       p {
@@ -162,7 +176,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 13%;
+      width: 104px;
 
       &-minus {
         svg {
@@ -182,6 +196,10 @@ body {
       align-items: center;
       justify-content: center;
       width: 33%;
+
+      @media (max-width: 820px) {
+        width: 20%;
+      }
 
       b {
         font-weight: bold;
