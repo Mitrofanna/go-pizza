@@ -1,5 +1,5 @@
 function Categories({ activeCategory, onClickCategory }) {
-  const categoriesList = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые'];
+  const categoriesList = ['Все', 'Мясные', 'Вегетарианские', 'Острые'];
 
   return (
     <div className="categories">

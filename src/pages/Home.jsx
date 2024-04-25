@@ -10,18 +10,25 @@ function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(0);
-  //const [activeSort, setActiveSort] = useState(0);
+  const [activeSort, setActiveSort] = useState({
+    name: 'популярности',
+    sort: 'rating',
+  });
+
+  const apiOrder = activeSort.name === `возрастанию цены` ? `asc` : `desc`;
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(API_ITEMS + '?category=' + activeCategory)
+    fetch(`${API_ITEMS}?category=${activeCategory}&sortBy=${activeSort.sort}&order=${apiOrder}`)
       .then((res) => res.json())
       .then((json) => {
         setItems(json);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory]);
+  }, [activeCategory, activeSort]);
+
+  console.log(activeCategory, activeSort);
 
   return (
     <div className="content">
@@ -29,9 +36,9 @@ function Home() {
         <div className="content__top">
           <Categories
             activeCategory={activeCategory}
-            onClickCategory={(index) => setActiveCategory(index)}
+            onClickCategory={(i) => setActiveCategory(i)}
           />
-          <Sort />
+          <Sort activeSort={activeSort} onClickSort={(i) => setActiveSort(i)} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

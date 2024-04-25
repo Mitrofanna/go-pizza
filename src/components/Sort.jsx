@@ -1,31 +1,34 @@
 import { useState } from 'react';
 
-function Sort() {
-  const sortList = ['популярные', 'по убыванию цены', 'по возрастанию цены'];
+function Sort({ activeSort, onClickSort }) {
+  const sortList = [
+    { name: 'популярности', sort: 'rating' },
+    { name: 'убыванию цены', sort: 'price' },
+    { name: 'возрастанию цены', sort: 'price' },
+  ];
 
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSort, setActiveSort] = useState(0);
 
-  const onClickSort = (index) => {
-    setActiveSort(index);
+  const onChangeSort = (index) => {
+    onClickSort(index);
     setIsOpen(false);
   };
 
   return (
     <div className="sort">
       <div className="sort__label">
-        <b>Сортировка</b>
-        <span onClick={() => setIsOpen(!isOpen)}>{sortList[activeSort]}</span>
+        <b>Сортировка по</b>
+        <span onClick={() => setIsOpen(!isOpen)}>{activeSort.name}</span>
       </div>
       {isOpen && (
         <div className="sort__popup">
           <ul>
-            {sortList.map((sort, index) => (
+            {sortList.map((item, index) => (
               <li
-                key={sort}
-                onClick={() => onClickSort(index)}
-                className={activeSort === index ? 'active' : ''}>
-                {sort}
+                key={index}
+                onClick={() => onChangeSort(item)}
+                className={activeSort.sort === item.sort ? 'active' : ''}>
+                {item.name}
               </li>
             ))}
           </ul>
