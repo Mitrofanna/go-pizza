@@ -2,7 +2,6 @@ import React from 'react';
 
 import styles from './EmptyBlock.module.scss';
 
-console.log(styles);
 function EmptyBlock() {
   return (
     <div className={styles.root}>

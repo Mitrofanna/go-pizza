@@ -28,8 +28,6 @@ function Home() {
     window.scrollTo(0, 0);
   }, [activeCategory, activeSort]);
 
-  console.log(activeCategory, activeSort);
-
   return (
     <div className="content">
       <div className="container">
