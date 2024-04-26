@@ -6,7 +6,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import Preloader from '../components/Preloader';
 import { API_ITEMS } from '../api';
 
-function Home() {
+function Home({ searchValue }) {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(0);
@@ -15,18 +15,20 @@ function Home() {
     sort: 'rating',
   });
 
-  const apiOrder = activeSort.name === `возрастанию цены` ? `asc` : `desc`;
-
   useEffect(() => {
+    const category = activeCategory > 0 ? `category=${activeCategory}` : '';
+    const order = activeSort.name === 'возрастанию цены' ? 'asc' : 'desc';
+    const search = searchValue ? `&search=${searchValue}` : '';
+
     setIsLoading(true);
-    fetch(`${API_ITEMS}?category=${activeCategory}&sortBy=${activeSort.sort}&order=${apiOrder}`)
+    fetch(`${API_ITEMS}?${category}&sortBy=${activeSort.sort}&order=${order}${search}`)
       .then((res) => res.json())
       .then((json) => {
         setItems(json);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, activeSort]);
+  }, [activeCategory, activeSort, searchValue]);
 
   return (
     <div className="content">
