@@ -9,6 +9,7 @@ import Pagination from '../components/Pagination';
 
 function Home({ searchValue }) {
   const [items, setItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(0);
   const [activeSort, setActiveSort] = useState({
@@ -22,14 +23,16 @@ function Home({ searchValue }) {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     setIsLoading(true);
-    fetch(`${API_ITEMS}?${category}&sortBy=${activeSort.sort}&order=${order}${search}`)
+    fetch(
+      `${API_ITEMS}?page=${currentPage}&limit=8&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
+    )
       .then((res) => res.json())
       .then((json) => {
         setItems(json);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, activeSort, searchValue]);
+  }, [activeCategory, activeSort, searchValue, currentPage]);
 
   return (
     <div className="content">
@@ -47,7 +50,7 @@ function Home({ searchValue }) {
             ? [...new Array(8)].map((_, index) => <Preloader key={index} />)
             : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
         </div>
-        <Pagination />
+        <Pagination onClickPage={(number) => setCurrentPage(number)} />
       </div>
     </div>
   );
