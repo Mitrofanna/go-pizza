@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import styles from './Search.module.scss';
-import { clear } from '@testing-library/user-event/dist/clear';
+import Context from '../../context';
 
-function Search({ searchValue, setSearchValue }) {
+function Search() {
+  const { searchValue, setSearchValue } = useContext(Context);
   return (
     <div className={styles.search}>
       <input
