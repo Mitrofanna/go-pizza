@@ -5,6 +5,7 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Preloader from '../components/Preloader';
 import { API_ITEMS } from '../api';
+import Pagination from '../components/Pagination';
 
 function Home({ searchValue }) {
   const [items, setItems] = useState([]);
@@ -46,6 +47,7 @@ function Home({ searchValue }) {
             ? [...new Array(8)].map((_, index) => <Preloader key={index} />)
             : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
         </div>
+        <Pagination />
       </div>
     </div>
   );

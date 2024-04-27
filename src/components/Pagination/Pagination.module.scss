@@ -1,0 +1,36 @@
+.pagination {
+  li {
+    display: inline-block;
+    cursor: pointer;
+
+    a {
+      font-family: inherit;
+      font-weight: 800;
+      display: inline-block;
+      color: #fe5f1e;
+      text-align: center;
+      line-height: 42px;
+      border-radius: 30px;
+      border: 2px solid #fe5f1e;
+      width: 45px;
+      height: 45px;
+      margin-right: 10px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fe5f1e;
+        color: #fff;
+      }
+    }
+  }
+
+  :global {
+    .selected {
+      a {
+        background-color: #fe5f1e;
+        color: #fff;
+      }
+    }
+  }
+}
