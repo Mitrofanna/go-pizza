@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -30,14 +31,16 @@ function Home() {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     setIsLoading(true);
-    fetch(
-      `${API_ITEMS}?page=${currentPage}&limit=8&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setItems(json);
+
+    axios
+      .get(
+        `${API_ITEMS}?page=${currentPage}&limit=8&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
+      )
+      .then((res) => {
+        setItems(res.data);
         setIsLoading(false);
       });
+
     window.scrollTo(0, 0);
   }, [activeCategory, activeSort, searchValue, currentPage]);
 
