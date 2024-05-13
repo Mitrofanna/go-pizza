@@ -11,7 +11,7 @@ import Context from '../context';
 import { setActiveCategory } from '../redux/slices/filterSlice';
 
 function Home() {
-  const activeCategory = useSelector((state) => state.filterSlice.activeCategory);
+  const { activeCategory, activeSort } = useSelector((state) => state.filterSlice);
   const dispatch = useDispatch();
 
   const { searchValue } = useContext(Context);
@@ -19,10 +19,6 @@ function Home() {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSort, setActiveSort] = useState({
-    name: 'популярности',
-    sort: 'rating',
-  });
 
   const onChangeCategory = (id) => {
     dispatch(setActiveCategory(id));
@@ -50,7 +46,7 @@ function Home() {
       <div className="container">
         <div className="content__top">
           <Categories activeCategory={activeCategory} onClickCategory={onChangeCategory} />
-          <Sort activeSort={activeSort} onClickSort={(i) => setActiveSort(i)} />
+          <Sort />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
