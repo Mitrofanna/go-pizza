@@ -9,20 +9,24 @@ import Preloader from '../components/Preloader';
 import { API_ITEMS } from '../api';
 import Pagination from '../components/Pagination';
 import Context from '../context';
-import { setActiveCategory } from '../redux/slices/filterSlice';
+import { setActiveCategory, setCurrentPage } from '../redux/slices/filterSlice';
 
 function Home() {
-  const { activeCategory, activeSort } = useSelector((state) => state.filterSlice);
+  const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filterSlice);
   const dispatch = useDispatch();
 
   const { searchValue } = useContext(Context);
 
   const [items, setItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  //const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setActiveCategory(id));
+  };
+
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
   };
 
   useEffect(() => {
@@ -34,7 +38,7 @@ function Home() {
 
     axios
       .get(
-        `${API_ITEMS}?page=${currentPage}&limit=8&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
+        `${API_ITEMS}?page=${currentPage}&limit=4&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
       )
       .then((res) => {
         setItems(res.data);
@@ -54,10 +58,10 @@ function Home() {
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
           {isLoading
-            ? [...new Array(8)].map((_, index) => <Preloader key={index} />)
+            ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
             : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
         </div>
-        <Pagination onClickPage={(number) => setCurrentPage(number)} />
+        <Pagination currentPage={currentPage} onClickPage={onChangePage} />
       </div>
     </div>
   );
