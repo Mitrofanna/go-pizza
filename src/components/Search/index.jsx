@@ -1,23 +1,38 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useCallback, useState } from 'react';
+import debounce from 'lodash.debounce';
 
 import styles from './Search.module.scss';
 import Context from '../../context';
 
 function Search() {
-  const { searchValue, setSearchValue } = useContext(Context);
+  const [value, setValue] = useState('');
+  const { setSearchValue } = useContext(Context);
   const inputRef = useRef();
 
   const onClickClear = () => {
     setSearchValue('');
+    setValue('');
     inputRef.current.focus();
+  };
+
+  const updateSearch = useCallback(
+    debounce((value) => {
+      setSearchValue(value);
+    }, 500),
+    [],
+  );
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    updateSearch(event.target.value);
   };
 
   return (
     <div className={styles.search}>
       <input
         ref={inputRef}
-        value={searchValue}
-        onChange={(event) => setSearchValue(event.target.value)}
+        value={value}
+        onChange={onChangeInput}
         className={styles.field}
         id="search"
         type="text"
@@ -34,7 +49,7 @@ function Search() {
         fill="#f2f2f2">
         <path d="m17.7 16.06-3.48-3.48a7.63 7.63 0 0 0 1.53-4.7c0-4.4-3.48-7.88-7.88-7.88A7.81 7.81 0 0 0 0 7.88c0 4.4 3.48 7.87 7.88 7.87 1.73 0 3.37-.61 4.7-1.53l3.48 3.47c.2.2.4.31.82.31.6 0 1.12-.51 1.12-1.13 0-.2-.1-.5-.3-.81ZM2.24 7.88a5.67 5.67 0 0 1 5.63-5.63 5.67 5.67 0 0 1 5.62 5.63 5.67 5.67 0 0 1-5.63 5.62 5.67 5.67 0 0 1-5.62-5.63Z" />
       </svg>
-      {searchValue && (
+      {value && (
         <svg
           onClick={onClickClear}
           className={styles.clear}
