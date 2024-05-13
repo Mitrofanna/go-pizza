@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './scss/app.scss';
 import Header from './components/Header';
@@ -11,7 +12,7 @@ import Context from './context';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
-  console.log(searchValue);
+
   return (
     <div className="wrapper">
       <Context.Provider value={{ searchValue, setSearchValue }}>

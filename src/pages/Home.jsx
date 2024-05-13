@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -7,18 +8,25 @@ import Preloader from '../components/Preloader';
 import { API_ITEMS } from '../api';
 import Pagination from '../components/Pagination';
 import Context from '../context';
+import { setActiveCategory } from '../redux/slices/filterSlice';
 
 function Home() {
+  const activeCategory = useSelector((state) => state.filterSlice.activeCategory);
+  const dispatch = useDispatch();
+
   const { searchValue } = useContext(Context);
 
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState(0);
   const [activeSort, setActiveSort] = useState({
     name: 'популярности',
     sort: 'rating',
   });
+
+  const onChangeCategory = (id) => {
+    dispatch(setActiveCategory(id));
+  };
 
   useEffect(() => {
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
@@ -41,10 +49,7 @@ function Home() {
     <div className="content">
       <div className="container">
         <div className="content__top">
-          <Categories
-            activeCategory={activeCategory}
-            onClickCategory={(i) => setActiveCategory(i)}
-          />
+          <Categories activeCategory={activeCategory} onClickCategory={onChangeCategory} />
           <Sort activeSort={activeSort} onClickSort={(i) => setActiveSort(i)} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
