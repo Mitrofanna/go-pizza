@@ -1,24 +1,27 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import qs from 'qs';
 
 import Categories from '../components/Categories';
-import Sort from '../components/Sort';
+import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Preloader from '../components/Preloader';
 import { API_ITEMS } from '../api';
 import Pagination from '../components/Pagination';
 import Context from '../context';
-import { setActiveCategory, setCurrentPage } from '../redux/slices/filterSlice';
+import { setActiveCategory, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 
 function Home() {
   const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filterSlice);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { searchValue } = useContext(Context);
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
 
   const [items, setItems] = useState([]);
-  //const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
@@ -29,13 +32,12 @@ function Home() {
     dispatch(setCurrentPage(number));
   };
 
-  useEffect(() => {
+  const fetchItems = () => {
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const order = activeSort.name === 'возрастанию цены' ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
 
     setIsLoading(true);
-
     axios
       .get(
         `${API_ITEMS}?page=${currentPage}&limit=4&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
@@ -44,7 +46,44 @@ function Home() {
         setItems(res.data);
         setIsLoading(false);
       });
+  };
 
+  //Проверяем был ли первый рендер
+  useEffect(() => {
+    if (isMounted.current) {
+      //Если нам пришли какие то параметры(обьект с данными), нужно преобразовать их в одну строку с помощью qs
+      const queryString = qs.stringify({
+        activeSort: activeSort.sort,
+        activeCategory,
+        currentPage,
+      });
+
+      //вшиваем эти данные в адресную строку с помощью useNavigate
+      navigate(`?${queryString}`);
+    }
+
+    isMounted.current = true;
+  }, [activeCategory, activeSort, currentPage]);
+
+  //проверяем URL-параметры и сохраем в редаксе
+  useEffect(() => {
+    //проверяем если есть что-то в адресной строке, то парсим(и убираем "?")
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const activeSort = list.find((obj) => obj.sort === params.sort);
+
+      dispatch(setFilters({ ...params, activeSort }));
+      isSearch.current = true;
+    }
+  }, []);
+
+  //проверяем нужно ли делать запрос на изменение данных
+  useEffect(() => {
+    if (!isSearch.current) {
+      fetchItems();
+    }
+
+    isSearch.current = false;
     window.scrollTo(0, 0);
   }, [activeCategory, activeSort, searchValue, currentPage]);
 

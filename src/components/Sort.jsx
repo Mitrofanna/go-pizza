@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setActiveSort } from '../redux/slices/filterSlice';
 
-const sortList = [
+export const list = [
   { name: 'популярности', sort: 'rating' },
   { name: 'убыванию цены', sort: 'price' },
   { name: 'возрастанию цены', sort: 'price' },
@@ -28,7 +28,7 @@ function Sort() {
       {isOpen && (
         <div className="sort__popup">
           <ul>
-            {sortList.map((item, index) => (
+            {list.map((item, index) => (
               <li
                 key={index}
                 onClick={() => onChangeSort(item)}
