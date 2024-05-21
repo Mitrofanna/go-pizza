@@ -5,7 +5,8 @@ import { addItem } from '../redux/slices/cartSlice';
 function PizzaBlock(props) {
   const { id, title, imageUrl, type, size, price } = props;
   const dispatch = useDispatch();
-
+  const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id));
+  const addedCount = cartItem ? cartItem.count : 0;
   const typeNames = ['тонкое', 'традиционное'];
 
   const [activeType, setActiveType] = useState(0);
@@ -16,7 +17,7 @@ function PizzaBlock(props) {
       id,
       title,
       imageUrl,
-      type: activeType,
+      type: typeNames[activeType],
       size: activeSize,
       price,
     };
@@ -64,7 +65,7 @@ function PizzaBlock(props) {
             />
           </svg>
           <span>Добавить</span>
-          <i>{0}</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>
