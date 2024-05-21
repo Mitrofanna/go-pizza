@@ -4,7 +4,8 @@ import CartItem from '../components/CartItem';
 
 function Cart() {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items);
+  const { items, totalPrice } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => item.count + sum, 0);
 
   return (
     <div className="content">
@@ -89,10 +90,10 @@ function Cart() {
           <div className="cart__bottom">
             <div className="cart__bottom-details">
               <span>
-                Всего пицц: <b>3 шт.</b>
+                Всего пицц: <b>{totalCount} шт.</b>
               </span>
               <span>
-                Сумма заказа: <b>900 ₽</b>
+                Сумма заказа: <b>{totalPrice} ₽</b>
               </span>
             </div>
             <div className="cart__bottom-buttons">
