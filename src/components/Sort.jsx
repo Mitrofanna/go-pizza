@@ -27,6 +27,7 @@ function Sort() {
     };
 
     document.body.addEventListener('click', onClickOutside);
+    //удаляет обработчик
     return () => document.body.removeEventListener('click', onClickOutside);
   }, []);
 
