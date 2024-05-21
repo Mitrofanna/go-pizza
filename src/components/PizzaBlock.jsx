@@ -18,7 +18,7 @@ function PizzaBlock(props) {
       title,
       imageUrl,
       type: typeNames[activeType],
-      size: activeSize,
+      size: size[activeSize],
       price,
     };
     dispatch(addItem(item));
