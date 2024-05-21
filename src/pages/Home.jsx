@@ -14,7 +14,7 @@ import Context from '../context';
 import { setActiveCategory, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 
 function Home() {
-  const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filterSlice);
+  const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { searchValue } = useContext(Context);

@@ -10,7 +10,7 @@ export const list = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const activeSort = useSelector((state) => state.filterSlice.activeSort);
+  const activeSort = useSelector((state) => state.filter.activeSort);
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef();
 
