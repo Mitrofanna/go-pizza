@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const filterSlice = createSlice({
-  name: 'filters',
+  name: 'filter',
   initialState,
   reducers: {
     setActiveCategory(state, action) {

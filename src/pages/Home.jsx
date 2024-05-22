@@ -11,17 +11,18 @@ import Preloader from '../components/Preloader';
 import { API_ITEMS } from '../api';
 import Pagination from '../components/Pagination';
 import Context from '../context';
+import { setItems } from '../redux/slices/productsSlice';
 import { setActiveCategory, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 
 function Home() {
   const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filter);
+  const items = useSelector((state) => state.products.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { searchValue } = useContext(Context);
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
@@ -39,10 +40,10 @@ function Home() {
 
     setIsLoading(true);
     try {
-      const res = await axios.get(
+      const { data } = await axios.get(
         `${API_ITEMS}?page=${currentPage}&limit=4&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
       );
-      setItems(res.data);
+      dispatch(setItems(data));
     } catch (error) {
       console.log('Ошибка при получении данных', error);
     } finally {
