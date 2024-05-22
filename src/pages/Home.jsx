@@ -1,29 +1,25 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import qs from 'qs';
 
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Preloader from '../components/Preloader';
-import { API_ITEMS } from '../api';
 import Pagination from '../components/Pagination';
 import Context from '../context';
-import { setItems } from '../redux/slices/productsSlice';
+import { fetchProducts } from '../redux/slices/productsSlice';
 import { setActiveCategory, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 
 function Home() {
   const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filter);
-  const items = useSelector((state) => state.products.items);
+  const { items, status } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { searchValue } = useContext(Context);
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-
-  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setActiveCategory(id));
@@ -38,17 +34,7 @@ function Home() {
     const order = activeSort.name === 'возрастанию цены' ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    setIsLoading(true);
-    try {
-      const { data } = await axios.get(
-        `${API_ITEMS}?page=${currentPage}&limit=4&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
-      );
-      dispatch(setItems(data));
-    } catch (error) {
-      console.log('Ошибка при получении данных', error);
-    } finally {
-      setIsLoading(false);
-    }
+    dispatch(fetchProducts({ category, order, search, currentPage, activeSort }));
   };
 
   //Проверяем был ли первый рендер
@@ -99,7 +85,7 @@ function Home() {
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-          {isLoading
+          {status === 'loading'
             ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
             : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
         </div>
