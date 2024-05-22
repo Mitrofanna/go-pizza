@@ -32,20 +32,22 @@ function Home() {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchItems = () => {
+  const fetchItems = async () => {
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const order = activeSort.name === 'возрастанию цены' ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
 
     setIsLoading(true);
-    axios
-      .get(
+    try {
+      const res = await axios.get(
         `${API_ITEMS}?page=${currentPage}&limit=4&${category}&sortBy=${activeSort.sort}&order=${order}${search}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
+      );
+      setItems(res.data);
+    } catch (error) {
+      console.log('Ошибка при получении данных', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   //Проверяем был ли первый рендер
