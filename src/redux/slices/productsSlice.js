@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { API_ITEMS } from '../../api';
 
+// Асинхронный экшн
 export const fetchProducts = createAsyncThunk('products/fetchProductsStatus', async (params) => {
   const { category, order, search, currentPage, activeSort } = params;
   const { data } = await axios.get(
@@ -41,6 +42,7 @@ const productsSlice = createSlice({
   },
 });
 
+export const productsSelector = (state) => state.products;
 export const { setItems } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
@@ -10,11 +10,16 @@ import Preloader from '../components/Preloader';
 import Pagination from '../components/Pagination';
 import Context from '../context';
 import { fetchProducts } from '../redux/slices/productsSlice';
-import { setActiveCategory, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import {
+  filterSelector,
+  setActiveCategory,
+  setCurrentPage,
+  setFilters,
+} from '../redux/slices/filterSlice';
 
 function Home() {
-  const { activeCategory, activeSort, currentPage } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.products);
+  const { activeCategory, activeSort, currentPage } = useSelector(filterSelector);
+  const { items, status } = useSelector(productsSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { searchValue } = useContext(Context);
