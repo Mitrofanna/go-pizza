@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
@@ -8,8 +8,7 @@ import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Preloader from '../components/Preloader';
 import Pagination from '../components/Pagination';
-import Context from '../context';
-import { fetchProducts } from '../redux/slices/productsSlice';
+import { fetchProducts, productsSelector } from '../redux/slices/productsSlice';
 import {
   filterSelector,
   setActiveCategory,
@@ -18,11 +17,10 @@ import {
 } from '../redux/slices/filterSlice';
 
 function Home() {
-  const { activeCategory, activeSort, currentPage } = useSelector(filterSelector);
+  const { activeCategory, activeSort, currentPage, searchValue } = useSelector(filterSelector);
   const { items, status } = useSelector(productsSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { searchValue } = useContext(Context);
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
