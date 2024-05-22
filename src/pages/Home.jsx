@@ -84,11 +84,18 @@ function Home() {
           <Sort />
         </div>
         <h2 className="content__title">Все пиццы</h2>
-        <div className="content__items">
-          {status === 'loading'
-            ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
-            : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
-        </div>
+        {status === 'error' ? (
+          <div className="content__error">
+            <h2>Произошла ошибка.</h2>
+            <p>Пожалуйста перезагрузите страницу или попробуйте зайти позже.</p>
+          </div>
+        ) : (
+          <div className="content__items">
+            {status === 'loading'
+              ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
+              : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
+          </div>
+        )}
         <Pagination currentPage={currentPage} onClickPage={onChangePage} />
       </div>
     </div>
