@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
 import Categories from '../components/Categories';
@@ -96,11 +96,7 @@ function Home() {
           <div className="content__items">
             {status === 'loading'
               ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
-              : items.map((item) => (
-                  <Link key={item.id} to={`/product/${item.id}`}>
-                    <PizzaBlock key={item.id} {...item} />
-                  </Link>
-                ))}
+              : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
           </div>
         )}
         <Pagination currentPage={currentPage} onClickPage={onChangePage} />
