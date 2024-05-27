@@ -1,7 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 
-function CartItem(props) {
+type TCartItemProps = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  type: number;
+  size: number;
+  price: number;
+  count: number;
+};
+
+const CartItem: React.FC<TCartItemProps> = (props) => {
   const { id, title, imageUrl, type, size, price, count } = props;
   const dispatch = useDispatch();
 
@@ -93,6 +103,6 @@ function CartItem(props) {
       </div>
     </div>
   );
-}
+};
 
 export default CartItem;

@@ -3,7 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem, cartItemSelector } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 
-function PizzaBlock(props) {
+type TCardItem = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  type: number[];
+  size: number[];
+  price: number;
+};
+
+const PizzaBlock: React.FC<TCardItem> = (props) => {
   const { id, title, imageUrl, type, size, price } = props;
   const dispatch = useDispatch();
   const cartItem = useSelector(cartItemSelector(id));
@@ -73,6 +82,6 @@ function PizzaBlock(props) {
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;

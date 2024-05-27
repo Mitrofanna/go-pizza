@@ -16,7 +16,7 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice';
 
-function Home() {
+const Home = () => {
   const { activeCategory, activeSort, currentPage, searchValue } = useSelector(filterSelector);
   const { items, status } = useSelector(productsSelector);
   const dispatch = useDispatch();
@@ -24,19 +24,19 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setActiveCategory(id));
   };
 
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (numberPage: number) => {
+    dispatch(setCurrentPage(numberPage));
   };
 
   const fetchItems = async () => {
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const order = activeSort.name === 'возрастанию цены' ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
-
+    //@ts-ignore
     dispatch(fetchProducts({ category, order, search, currentPage, activeSort }));
   };
 
@@ -96,13 +96,13 @@ function Home() {
           <div className="content__items">
             {status === 'loading'
               ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
-              : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
+              : items.map((item: any) => <PizzaBlock key={item.id} {...item} />)}
           </div>
         )}
         <Pagination currentPage={currentPage} onClickPage={onChangePage} />
       </div>
     </div>
   );
-}
+};
 
 export default Home;

@@ -1,4 +1,9 @@
-function Categories({ activeCategory, onClickCategory }) {
+type TCategoriesProps = {
+  activeCategory: number;
+  onClickCategory: any;
+};
+
+const Categories: React.FC<TCategoriesProps> = ({ activeCategory, onClickCategory }) => {
   const categoriesList = ['Все', 'Мясные', 'Вегетарианские', 'Острые'];
 
   return (
@@ -15,6 +20,6 @@ function Categories({ activeCategory, onClickCategory }) {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;

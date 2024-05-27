@@ -4,10 +4,10 @@ import CartItem from '../components/CartItem';
 import { cartSelector, clearItems } from '../redux/slices/cartSlice';
 import CartEmpty from '../components/CartEmpty';
 
-function Cart() {
+const Cart = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
-  const totalCount = items.reduce((sum, item) => item.count + sum, 0);
+  const totalCount = items.reduce((sum: number, item: any) => item.count + sum, 0);
 
   const onClearCart = () => {
     dispatch(clearItems());
@@ -93,7 +93,7 @@ function Cart() {
             </div>
           </div>
           <div className="cart__items">
-            {items.map((item) => (
+            {items.map((item: any) => (
               <CartItem key={item.id} {...item} />
             ))}
           </div>
@@ -133,6 +133,6 @@ function Cart() {
       </div>
     </div>
   );
-}
+};
 
 export default Cart;

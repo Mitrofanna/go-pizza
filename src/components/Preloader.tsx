@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-const Preloader = () => (
+const Preloader: React.FC = () => (
   <ContentLoader
     className="pizza-block"
     speed={2}

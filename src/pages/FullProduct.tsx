@@ -5,9 +5,15 @@ import { toast } from 'react-toastify';
 
 import { API_ITEMS } from '../api';
 
-function FullProduct() {
+const FullProduct = () => {
   const { id } = useParams();
-  const [fullProduct, setFullProduct] = useState();
+
+  const [fullProduct, setFullProduct] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
+
   const navigate = useNavigate();
   const notify = () => toast.error('Ошибка при получении данных', { autoClose: 1500 });
 
@@ -35,6 +41,6 @@ function FullProduct() {
       <span>{fullProduct.price}</span>
     </section>
   );
-}
+};
 
 export default FullProduct;
