@@ -1,6 +1,6 @@
 type TCategoriesProps = {
   activeCategory: number;
-  onClickCategory: any;
+  onClickCategory: (index: number) => void;
 };
 
 const Categories: React.FC<TCategoriesProps> = ({ activeCategory, onClickCategory }) => {
