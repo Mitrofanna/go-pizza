@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
+import { useAppDispatch } from '../redux/store';
 
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
@@ -20,7 +21,7 @@ import {
 const Home = () => {
   const { activeCategory, activeSort, currentPage, searchValue } = useSelector(filterSelector);
   const { items, status } = useSelector(productsSelector);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { filterSelector, setActiveSort } from '../redux/slices/filterSlice';
 import { TSort } from '../@types/sort';
+import { useAppDispatch } from '../redux/store';
 
 export const list: TSort[] = [
   { name: 'популярности', sort: 'rating' },
@@ -10,7 +11,7 @@ export const list: TSort[] = [
 ];
 
 const Sort: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { activeSort } = useSelector(filterSelector);
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);

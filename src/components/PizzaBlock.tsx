@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { addItem, cartItemSelector } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { TCard } from '../@types/card';
+import { useAppDispatch } from '../redux/store';
 
 const PizzaBlock: React.FC<TCard> = (props) => {
   const { id, title, imageUrl, type, size, price } = props;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const cartItem = useSelector(cartItemSelector(id));
   const addedCount = cartItem ? cartItem.count : 0;
   const typeNames = ['тонкое', 'традиционное'];

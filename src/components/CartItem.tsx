@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
 import { TCard } from '../@types/card';
+import { useAppDispatch } from '../redux/store';
 
 const CartItem: React.FC<TCard> = (props) => {
   const { id, title, imageUrl, type, size, price, count } = props;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onClickMinus = () => {
     dispatch(minusItem(id));

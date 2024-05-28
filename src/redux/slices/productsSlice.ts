@@ -6,11 +6,11 @@ import { API_ITEMS, Status } from '../../consts';
 import { RootState } from '../store';
 import { TCard } from '../../@types/card';
 
-type TFetchProductsParams = {
+export type TFetchProductsParams = {
   category: string;
   order: string;
   search: string;
-  currentPage: string;
+  currentPage: string | number;
   activeSort: TSort;
 };
 
