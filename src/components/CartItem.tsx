@@ -30,8 +30,9 @@ const CartItem: React.FC<TCard> = (props) => {
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
           onClick={onClickMinus}
+          disabled={count! <= 1}
           className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
@@ -48,9 +49,9 @@ const CartItem: React.FC<TCard> = (props) => {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
         <b>{count}</b>
-        <div
+        <button
           onClick={onClickPlus}
           className="button button--outline button--circle cart__item-count-plus">
           <svg
@@ -68,7 +69,7 @@ const CartItem: React.FC<TCard> = (props) => {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
       <div className="cart__item-price">
         <b>{price * count!} ₽</b>
