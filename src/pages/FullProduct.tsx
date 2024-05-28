@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { API_ITEMS } from '../api';
+import { API_ITEMS } from '../consts';
 
 const FullProduct = () => {
   const { id } = useParams();

@@ -2,17 +2,9 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, cartItemSelector } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
+import { TCard } from '../@types/card';
 
-type TCardItem = {
-  id: string;
-  title: string;
-  imageUrl: string;
-  type: number[];
-  size: number[];
-  price: number;
-};
-
-const PizzaBlock: React.FC<TCardItem> = (props) => {
+const PizzaBlock: React.FC<TCard> = (props) => {
   const { id, title, imageUrl, type, size, price } = props;
   const dispatch = useDispatch();
   const cartItem = useSelector(cartItemSelector(id));
@@ -77,7 +69,7 @@ const PizzaBlock: React.FC<TCardItem> = (props) => {
             />
           </svg>
           <span>Добавить</span>
-          {addedCount > 0 && <i>{addedCount}</i>}
+          {addedCount! > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>

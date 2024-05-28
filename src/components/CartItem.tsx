@@ -1,17 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
+import { TCard } from '../@types/card';
 
-type TCartItemProps = {
-  id: string;
-  title: string;
-  imageUrl: string;
-  type: number;
-  size: number;
-  price: number;
-  count: number;
-};
-
-const CartItem: React.FC<TCartItemProps> = (props) => {
+const CartItem: React.FC<TCard> = (props) => {
   const { id, title, imageUrl, type, size, price, count } = props;
   const dispatch = useDispatch();
 
@@ -80,7 +71,7 @@ const CartItem: React.FC<TCartItemProps> = (props) => {
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} ₽</b>
+        <b>{price * count!} ₽</b>
       </div>
       <div className="cart__item-remove">
         <div onClick={onRemoveItem} className="button button--outline button--circle">

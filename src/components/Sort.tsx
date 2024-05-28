@@ -1,13 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterSelector, setActiveSort } from '../redux/slices/filterSlice';
+import { TSort } from '../@types/sort';
 
-type TSortItem = {
-  name: string;
-  sort: string;
-};
-
-export const list: TSortItem[] = [
+export const list: TSort[] = [
   { name: 'популярности', sort: 'rating' },
   { name: 'убыванию цены', sort: 'price' },
   { name: 'возрастанию цены', sort: 'price' },
@@ -19,7 +15,7 @@ const Sort: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  const onChangeSort = (obj: TSortItem) => {
+  const onChangeSort = (obj: TSort) => {
     dispatch(setActiveSort(obj));
     setIsOpen(false);
   };

@@ -8,6 +8,7 @@ import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Preloader from '../components/Preloader';
 import Pagination from '../components/Pagination';
+import { Status } from '../consts';
 import { fetchProducts, productsSelector } from '../redux/slices/productsSlice';
 import {
   filterSelector,
@@ -36,7 +37,7 @@ const Home = () => {
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const order = activeSort.name === 'возрастанию цены' ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
-    //@ts-ignore
+
     dispatch(fetchProducts({ category, order, search, currentPage, activeSort }));
   };
 
@@ -87,14 +88,14 @@ const Home = () => {
           <Sort />
         </div>
         <h2 className="content__title">Все пиццы</h2>
-        {status === 'error' ? (
+        {status === Status.ERROR ? (
           <div className="content__error">
             <h2>К сожалению ничего не найдено.</h2>
             <p>Пожалуйста перезагрузите страницу или попробуйте зайти позже.</p>
           </div>
         ) : (
           <div className="content__items">
-            {status === 'loading'
+            {status === Status.LOADING
               ? [...new Array(4)].map((_, index) => <Preloader key={index} />)
               : items.map((item: any) => <PizzaBlock key={item.id} {...item} />)}
           </div>
