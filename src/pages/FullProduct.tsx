@@ -35,7 +35,7 @@ const FullProduct = () => {
   }
 
   return (
-    <section className="container">
+    <section className="product">
       <img src={fullProduct.imageUrl}></img>
       <h2>{fullProduct.title}</h2>
       <span>{fullProduct.price}</span>
