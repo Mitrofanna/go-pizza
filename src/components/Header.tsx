@@ -17,8 +17,8 @@ const Header: React.FC = () => {
           <div className="header__logo">
             <img width="38" src={logo} alt="Логотип 'Go pizza'." />
             <div>
-              <h1>Go Pizza</h1>
-              <p>бомбическая пицца</p>
+              <h1 className="header__animation">Go Pizza</h1>
+              <p className="header__animation">бомбическая пицца</p>
             </div>
           </div>
         </Link>

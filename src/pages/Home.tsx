@@ -88,7 +88,7 @@ const Home = () => {
           <Categories activeCategory={activeCategory} onClickCategory={onChangeCategory} />
           <Sort />
         </div>
-        <h2 className="content__title">Все пиццы</h2>
+        <h2 className="content__title content__animation">Все пиццы</h2>
         {status === Status.ERROR ? (
           <div className="content__error">
             <h2>К сожалению ничего не найдено.</h2>

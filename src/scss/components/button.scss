@@ -2,8 +2,10 @@
 
 .button {
   display: inline-block;
-  background-color: $orange;
+  background-color: #585858;
+  background-image: url('https://img.freepik.com/free-photo/wooden-flooring-textured-background-design_53876-108360.jpg?t=st=1716992453~exp=1716996053~hmac=f960f85d60f5458293cb923838d33b8f08f07d365a1d9f113b97b8088536ddcf&w=2000');
   border-radius: 30px;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
   padding: 10px 20px;
   min-width: 100px;
   text-align: center;
@@ -54,21 +56,24 @@
   }
 
   &--outline {
-    background-color: #fff;
-    border-color: $orange;
+    background-color: transparent;
+    border: 1px solid #585858;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
     &,
     span {
-      color: $orange;
+      color: #181818;
+      font-weight: 700;
     }
 
     svg {
       path {
-        fill: $orange;
+        fill: #585858;
       }
     }
 
     &:hover {
-      background-color: $orange;
+      background: #ffffff;
+      background-image: url('https://img.freepik.com/free-photo/wooden-flooring-textured-background-design_53876-108360.jpg?t=st=1716992453~exp=1716996053~hmac=f960f85d60f5458293cb923838d33b8f08f07d365a1d9f113b97b8088536ddcf&w=2000');
 
       &,
       span {
@@ -108,20 +113,20 @@
     &:hover {
       i {
         background-color: #fff;
-        color: $orange;
+        color: #585858;
       }
     }
 
     i {
       display: inline-block;
       border-radius: 30px;
-      background-color: $orange;
-      color: #fff;
-      font-weight: 600;
+      background-color: transparent;
+      color: #585858;
+      font-weight: 700;
       width: 22px;
       height: 22px;
       font-style: normal;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 22px;
       position: relative;
       top: -1px;

@@ -3,11 +3,13 @@
 }
 
 .field {
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #585858;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
   padding: 10px 40px;
   border-radius: 10px;
   width: 300px;
   font-size: 16px;
+  background-color: transparent;
 }
 
 .label {
@@ -21,6 +23,7 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+  fill: #585858;
 }
 
 .clear {
@@ -29,5 +32,5 @@
   right: 10px;
   width: 22px;
   height: 22px;
-  opacity: 0.3;
+  opacity: 0.5;
 }

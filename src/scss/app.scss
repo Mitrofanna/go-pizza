@@ -3,14 +3,17 @@
 
 @import 'components/all';
 
-body {
-  background-color: $background;
+.page-background {
+  background-color: #787878;
+  background-image: url('https://img.freepik.com/free-photo/pizza-pizza-filled-with-tomatoes-salami-olives_140725-1200.jpg?t=st=1716986906~exp=1716990506~hmac=f9694eb1e81446fc8e2d6fed7975e5a4e8493459a7f9d842de33a9ff38b56371&w=1380');
 }
 
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
   background-color: #fff;
+  background-image: url('https://img.freepik.com/free-photo/wooden-background-with-cracks_1249-35.jpg?t=st=1716989632~exp=1716993232~hmac=674817b79d9a649b5c5daab96722eed869b1e9a95fdd17e3b85da7149f0d51bb&w=2000');
+  background-size: cover;
   margin: 0 auto;
   max-width: 1400px;
 }
@@ -20,6 +23,10 @@ body {
 
   &__title {
     margin: 35px 0;
+  }
+
+  &__animation {
+    animation: content__animation 2s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   }
 
   &__items {
@@ -112,8 +119,9 @@ body {
     span {
       display: inline-block;
       margin-left: 7px;
-      color: #b6b6b6;
+      color: #585858;
       font-size: 18px;
+      font-weight: 600;
     }
 
     span,
@@ -125,7 +133,7 @@ body {
     &:hover {
       svg {
         path {
-          stroke: darken($color: #b6b6b6, $amount: 50);
+          stroke: darken($color: #585858, $amount: 50);
         }
       }
       span {
@@ -137,7 +145,7 @@ body {
   &__item {
     display: flex;
     width: 100%;
-    border-top: 1px solid $gray-line;
+    border-top: 1px solid #585858;
     padding-top: 30px;
     margin-top: 30px;
     justify-content: space-between;
@@ -277,13 +285,7 @@ body {
       justify-content: space-between;
 
       span {
-        font-size: 22px;
-
-        &:last-of-type {
-          b {
-            color: $orange;
-          }
-        }
+        font-size: 24px;
       }
     }
 
@@ -298,17 +300,14 @@ body {
         justify-content: center;
         width: 210px;
 
-        border-color: darken($color: $gray-line, $amount: 10);
-
         span {
-          color: darken($color: $gray-line, $amount: 20);
+          color: #fff;
           font-weight: 500;
           font-weight: 600;
         }
 
         &:hover {
-          background-color: darken($color: $gray-line, $amount: 90);
-          border-color: darken($color: $gray-line, $amount: 90);
+          transform: translateX(-5px);
 
           span {
             color: $gray-line;
@@ -371,5 +370,18 @@ body {
       font-size: 18px;
       margin-bottom: 100px;
     }
+  }
+}
+
+@keyframes content__animation {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
   }
 }

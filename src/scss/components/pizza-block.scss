@@ -19,9 +19,11 @@
   &__selector {
     display: flex;
     background-color: #f3f3f3;
+    background-image: url('https://img.freepik.com/free-photo/wooden-flooring-textured-background-design_53876-108360.jpg?t=st=1716992453~exp=1716996053~hmac=f960f85d60f5458293cb923838d33b8f08f07d365a1d9f113b97b8088536ddcf&w=2000');
     border-radius: 10px;
     flex-direction: column;
     padding: 6px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
 
     ul {
       display: flex;
@@ -35,11 +37,12 @@
         padding: 8px;
         flex: 1;
         cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
+        font-weight: 700;
+        font-size: 18px;
         @include noselect();
         &.active {
           background: #ffffff;
+          background-image: url('https://img.freepik.com/free-photo/wooden-background-with-cracks_1249-35.jpg?t=st=1716989632~exp=1716993232~hmac=674817b79d9a649b5c5daab96722eed869b1e9a95fdd17e3b85da7149f0d51bb&w=2000');
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
           border-radius: 5px;
           cursor: auto;

@@ -5,9 +5,10 @@
     display: flex;
 
     li {
-      background-color: #f9f9f9;
+      background-color: transparent;
       padding: 13px 30px;
       border-radius: 30px;
+      box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
       margin-right: 10px;
       font-weight: bold;
       cursor: pointer;
@@ -15,11 +16,13 @@
       @include noselect();
 
       &:hover {
-        background-color: darken(#f9f9f9, 2%);
+        background-color: #282828;
+        color: #fff;
       }
 
       &:active {
-        background-color: darken(#f9f9f9, 5%);
+        background-color: #282828;
+        color: #fff;
       }
 
       &.active {

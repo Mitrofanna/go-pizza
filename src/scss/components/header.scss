@@ -1,13 +1,17 @@
 @import '../variables';
 
 .header {
-  border-bottom: 1px solid $gray-line;
+  border-bottom: 1px solid #585858;
   padding: 40px 0;
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__animation {
+    animation: header__animation 2s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   }
 
   &__logo {
@@ -26,7 +30,24 @@
     }
 
     p {
-      color: #7b7b7b;
+      color: #585858;
+      min-width: 170px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 16px;
     }
+  }
+}
+
+@keyframes header__animation {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
   }
 }

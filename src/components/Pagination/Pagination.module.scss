@@ -7,11 +7,12 @@
       font-family: inherit;
       font-weight: 800;
       display: inline-block;
-      color: #fe5f1e;
+      color: #585858;
       text-align: center;
       line-height: 42px;
       border-radius: 30px;
-      border: 2px solid #fe5f1e;
+      box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+      //border: 2px solid #585858;
       width: 45px;
       height: 45px;
       margin-right: 10px;
@@ -19,7 +20,8 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #fe5f1e;
+        background-color: #181818;
+        background-image: url('https://img.freepik.com/free-photo/wooden-flooring-textured-background-design_53876-108360.jpg?t=st=1716992453~exp=1716996053~hmac=f960f85d60f5458293cb923838d33b8f08f07d365a1d9f113b97b8088536ddcf&w=2000');
         color: #fff;
       }
     }
@@ -28,7 +30,8 @@
   :global {
     .selected {
       a {
-        background-color: #fe5f1e;
+        background-color: #181818;
+        background-image: url('https://img.freepik.com/free-photo/wooden-flooring-textured-background-design_53876-108360.jpg?t=st=1716992453~exp=1716996053~hmac=f960f85d60f5458293cb923838d33b8f08f07d365a1d9f113b97b8088536ddcf&w=2000');
         color: #fff;
       }
     }
