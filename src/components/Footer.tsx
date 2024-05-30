@@ -1,3 +1,5 @@
+import photo from '../assets/img/photo.jpg';
+
 const Footer: React.FC = () => {
   return (
     <div className="footer">
@@ -8,7 +10,7 @@ const Footer: React.FC = () => {
           <div className="footer__wrapper">
             <img
               className="footer__avatar"
-              src="./img/content/avatar.jpg"
+              src={photo}
               width="56"
               height="56"
               alt="Фото разработчика."></img>
