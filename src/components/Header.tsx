@@ -4,11 +4,23 @@ import { useSelector } from 'react-redux';
 
 import Search from './Search';
 import { cartSelector } from '../redux/slices/cartSlice';
+import { useEffect, useRef } from 'react';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const totalCount = items.reduce((sum: number, item: any) => item.count + sum, 0);
   const location = useLocation();
+  const isMounted = useRef(false);
+
+  //сохраняет данные корзины в localStorage
+  useEffect(() => {
+    //проверка был ли первый рендер, чтобы зря не сохранять пустой массив
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <header className="header">

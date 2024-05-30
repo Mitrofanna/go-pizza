@@ -1,15 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TCard } from '../../@types/card';
 import { RootState } from '../store';
+import { getDataLS } from '../../utils/dataLS';
+import { getTotalPrice } from '../../utils/totalPrice';
 
 type TCartSlice = {
   items: TCard[];
   totalPrice: number;
 };
 
+//берет данные из local storage
 const initialState: TCartSlice = {
-  items: [],
-  totalPrice: 0,
+  items: getDataLS().items,
+  totalPrice: getDataLS().totalPrice,
 };
 
 const cartSlice = createSlice({
@@ -27,7 +30,7 @@ const cartSlice = createSlice({
         });
       }
 
-      state.totalPrice = state.items.reduce((sum, item) => item.price * item.count! + sum, 0);
+      state.totalPrice = getTotalPrice(state.items);
     },
     removeItem(state, action: PayloadAction<string>) {
       state.items = state.items.filter((item) => item.id !== action.payload);
