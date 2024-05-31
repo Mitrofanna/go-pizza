@@ -31,14 +31,18 @@ const FullProduct = () => {
   }, []);
 
   if (!fullProduct) {
-    return 'Загрузка';
+    return (
+      <div className="product__loading">
+        <h2>Загрузка...</h2>
+      </div>
+    );
   }
 
   return (
     <section className="product">
       <img src={fullProduct.imageUrl}></img>
       <h2>{fullProduct.title}</h2>
-      <span>{fullProduct.price}</span>
+      <span>{fullProduct.price} ₽</span>
     </section>
   );
 };

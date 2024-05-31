@@ -1,4 +1,8 @@
 .product {
   margin: 20px 0;
   text-align: center;
+
+  &__loading {
+    min-height: 500px;
+  }
 }

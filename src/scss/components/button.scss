@@ -26,12 +26,7 @@
     transition: all $duration ease-in-out;
   }
 
-  &:hover {
-    background-color: darken($orange, 8%);
-  }
-
   &:active {
-    background-color: darken($orange, 12%);
     transform: translateY(1px);
   }
 
@@ -85,10 +80,6 @@
           fill: #fff;
         }
       }
-    }
-
-    &:active {
-      background-color: darken($orange, 8%);
     }
   }
 
