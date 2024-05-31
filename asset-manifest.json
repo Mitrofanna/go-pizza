@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/go-pizza/static/css/main.ec099327.css",
+    "main.js": "/go-pizza/static/js/main.df6135c0.js",
+    "static/media/photo.jpg": "/go-pizza/static/media/photo.e6224f94c6de21ad4947.jpg",
+    "static/media/pizza-logo.svg": "/go-pizza/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
+    "index.html": "/go-pizza/index.html",
+    "main.ec099327.css.map": "/go-pizza/static/css/main.ec099327.css.map",
+    "main.df6135c0.js.map": "/go-pizza/static/js/main.df6135c0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec099327.css",
+    "static/js/main.df6135c0.js"
+  ]
+}
